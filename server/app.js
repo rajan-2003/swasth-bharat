@@ -1,3 +1,4 @@
+
 require("dotenv").config();
 const express = require("express");
 const connectDB = require("./config/db");
@@ -17,19 +18,11 @@ connectDB();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-//appointment api route
-app.use("/", appointmentRoutes);
-
-//doctors api route
 app.use("/api/doctors", require("./routes/doctor"));
 
-//doctors api notifications
 app.use("/user/notifications", notificationRouter);
-
-//doctors api favourite routes
+app.use("/", appointmentRoutes);
 app.use("/favourites", favouritesRoutes);
-
-//doctors api user authentication routes
 app.use("/userAuth", userRoutes);
 
 const PORT = process.env.PORT || 5000;
